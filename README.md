@@ -1,5 +1,3 @@
-# 
-This file contains 
 ## Course: RUBY
 ### Project: Ruby-Enumerables
 
