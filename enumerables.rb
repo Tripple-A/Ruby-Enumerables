@@ -65,25 +65,26 @@ module Enumerable
     counter
   end
 
-  def my_map
+  def my_map(&my_proc)
     i = 0
     result = []
     while i < length
-      answer = yield(self[i])
+      answer = my_proc.call(self[i])
       result << answer
       i += 1
     end
     result
   end
 
+  def my_inject(*_initial)
+    i = 0
+    top = self[i]
+    while i < length - 1
+      result = yield(top, self[i + 1])
+      top = result
+      i += 1
+    end
+    result
+  end
 end
 
-arr = [1, 2, 3, 4, 5]
-rice = arr.select { |i| i >= 3 && i <= 7 }
-beans = arr.my_select { |i| i >= 3 && i <= 7 }
-dodo=arr.map { |i| i >= 3 && i <= 7 }
-stew=arr.my_map { |i| i >= 3 && i <= 7 }
-print rice
-print beans
-print dodo
-print stew
