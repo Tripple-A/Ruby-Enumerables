@@ -22,7 +22,7 @@ module Enumerable
     result = []
     while i < length
       answer = yield(self[i])
-      result << answer unless answer.nil?
+      result << self[i] unless answer == false
       i += 1
     end
     result
@@ -58,14 +58,32 @@ module Enumerable
   def my_count
     return length unless block_given?
 
-    block_given?
     counter = 0
     (0...length).each do |i|
       counter += 1 if yield(self[i]) == true
     end
     counter
   end
+
+  def my_map
+    i = 0
+    result = []
+    while i < length
+      answer = yield(self[i])
+      result << answer
+      i += 1
+    end
+    result
+  end
+
 end
 
 arr = [1, 2, 3, 4, 5]
-
+rice = arr.select { |i| i >= 3 && i <= 7 }
+beans = arr.my_select { |i| i >= 3 && i <= 7 }
+dodo=arr.map { |i| i >= 3 && i <= 7 }
+stew=arr.my_map { |i| i >= 3 && i <= 7 }
+print rice
+print beans
+print dodo
+print stew
