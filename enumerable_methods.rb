@@ -66,25 +66,17 @@ module Enumerable
     test
   end
 
-  def my_count
-    return length unless block_given?
-
+  def my_count (classification=nil)
     counter = 0
-    (0...length).each do |i|
-      counter += 1 if yield(self[i]) == true
-    end
+    my_each { |item| counter+=1 if item == classification } if [Integer, String].include?(classification.class)
+    my_each { |item| counter+=1 if yield(item) == true } if [Integer, String].include?(classification.class)
+    my_each {|item| counter+=1 if item.class==classification} if classification.class==Class
+    return length if !classification && !block_given?
     counter
   end
+  
 
 end
 
 arr = [4, 2, 1, 8, 4, 1, 0, 8, 5, 7, 5, 5, 4, 5, 3, 4, 4, 4, 7, 8, 5, 2, 6, 8, 4, 4, 1, 7, 6, 8, 5, 4, 6, 1, 5, 8, 2, 7, 1, 8, 1, 1, 0, 4, 5, 7, 0, 3, 4, 3, 6, 3, 1, 4, 2, 3, 8, 8, 5, 4, 0, 8, 1, 6, 7, 2, 6, 4, 6, 1, 6, 4, 7, 6, 0, 7, 8, 4, 0, 2, 3, 3, 6, 0, 1, 1, 5, 4, 6, 1, 7, 7, 8, 5, 8, 0, 4, 1, 7, 5]
-false_arr = [nil, false, nil, false]
-
-words = %w[dog door rod blade]
-
-print false_arr.my_none?
-print arr.my_none?(Integer)
-print words.my_none?(/z/)
-words[0] = 'cat'
-print words.my_none?('cat')
+print arr.my_count(Integer)
