@@ -87,4 +87,3 @@ module Enumerable
     result
   end
 end
-
