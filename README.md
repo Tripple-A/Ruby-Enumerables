@@ -2,7 +2,6 @@
 ### Project: Ruby-Enumerables
 
 #### Contributors
-* [Abubakar Diallo](https://github.com/abruzy)
 * [Ajibade Abiodun](https://github.com/Tripple-A)
 
 ### Project Goal
