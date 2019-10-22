@@ -22,24 +22,33 @@ module Enumerable
     result = []
     while i < length
       answer = yield(self[i])
-      result << answer if answer != nil
+      result << answer unless answer.nil?
       i += 1
     end
     result
   end
+
+  def my_all?
+    test = true
+    (0...length).each do |i|
+      test = false if yield(self[i]) == false
+      break if test == false
+    end
+    test
+  end
+
+  def my_any?
+    test = false
+    (0...length).each do |i|
+      test = true if yield(self[i]) == true
+      break if test == true
+    end
+    test
+  end
 end
 
 arr = [1, 2, 3, 4, 5]
-arr.my_each do |num|
-  print num * 2
+rice = arr.my_any? do |i|
+  i >= 6
 end
-
-arr.my_each_with_index do |num, index|
-  print num if index.even?
-end
-
-rice = arr.my_select do |num|
-  num if num >= 3
-end
-
 print rice
