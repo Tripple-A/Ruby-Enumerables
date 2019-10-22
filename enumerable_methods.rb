@@ -74,9 +74,38 @@ module Enumerable
     return length if !classification && !block_given?
     counter
   end
+
+  def my_map(&my_proc)
+    return to_enum(:my_map) unless block_given?
+
+    i = 0
+    result = []
+    while i < length
+      answer = my_proc.call(self[i])
+      result << answer
+      i += 1
+    end
+    result
+  end
+
+  def my_inject(total = nil, current = nil)
+    arr = is_a?(Range) ? to_a : self
+    beginner = total.nil? || total.is_a?(Symbol) ? arr[0] : total
+    if block_given?
+      start = total ? 0 : 1
+      arr[start..-1].my_each { |item| beginner = yield(beginner, item) }
+    end
+    arr[1..-1].my_each { |item| beginner = beginner.send(total, item) } if total.is_a?(Symbol)
+    arr[0..-1].my_each { |item| beginner = beginner.send(current, item) } if current
+    beginner
+  end
   
 
 end
 
-arr = [4, 2, 1, 8, 4, 1, 0, 8, 5, 7, 5, 5, 4, 5, 3, 4, 4, 4, 7, 8, 5, 2, 6, 8, 4, 4, 1, 7, 6, 8, 5, 4, 6, 1, 5, 8, 2, 7, 1, 8, 1, 1, 0, 4, 5, 7, 0, 3, 4, 3, 6, 3, 1, 4, 2, 3, 8, 8, 5, 4, 0, 8, 1, 6, 7, 2, 6, 4, 6, 1, 6, 4, 7, 6, 0, 7, 8, 4, 0, 2, 3, 3, 6, 0, 1, 1, 5, 4, 6, 1, 7, 7, 8, 5, 8, 0, 4, 1, 7, 5]
-print arr.my_count(Integer)
+def multiply_els(array)
+  array.my_inject(1) { |a, b| a * b }
+end
+
+puts multiply_els([2, 4, 5])
+
