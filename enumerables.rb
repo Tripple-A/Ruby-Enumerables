@@ -54,10 +54,18 @@ module Enumerable
     end
     !test
   end
+
+  def my_count
+    return length unless block_given?
+
+    block_given?
+    counter = 0
+    (0...length).each do |i|
+      counter += 1 if yield(self[i]) == true
+    end
+    counter
+  end
 end
 
 arr = [1, 2, 3, 4, 5]
-rice = arr.my_none? do |i|
-  i >= 6
-end
-print rice
+
