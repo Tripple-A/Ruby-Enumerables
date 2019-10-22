@@ -18,13 +18,13 @@ module Enumerable
   end
 
   def my_select
-  i=0
-  result=[]
-  while i < length
-  result << yield(self[i])
-  i++1
-  end
-  result
+    i = 0
+    result = []
+    while i < length
+      result << yield(self[i])
+      i += 1
+    end
+    print result
   end
 end
 
@@ -37,6 +37,6 @@ arr.my_each_with_index do |num, index|
   print num if index.even?
 end
 
-print arr.my_select do |num|
+arr.select do |num|
 num >= 3
 end
