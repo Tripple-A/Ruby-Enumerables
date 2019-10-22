@@ -45,10 +45,19 @@ module Enumerable
     end
     test
   end
+
+  def my_none?
+    test = false
+    (0...length).each do |i|
+      test = true if yield(self[i]) == true
+      break if test == true
+    end
+    !test
+  end
 end
 
 arr = [1, 2, 3, 4, 5]
-rice = arr.my_any? do |i|
+rice = arr.my_none? do |i|
   i >= 6
 end
 print rice
