@@ -39,7 +39,7 @@ module Enumerable
   def my_all?(classification = nil)
     test = true
     checked = classification.class
-    my_each { |item| return false unless yield[item] == false } if block_given?
+    my_each { |item| return false if yield(item) == false } if block_given?
     my_each { |item| return false unless item.class == classification } if checked == Class
     my_each { |item| return false unless item =~ classification } if checked == Regexp
     my_each { |item| return false unless item == classification } if [Integer, String].include?(checked)
@@ -49,10 +49,10 @@ module Enumerable
 
   def my_any?(classification = nil)
     test = false
-    my_each { |item| return true unless yield(item) == false } if block_given?
-    my_each { |item| return true unless item.class == classification } if classification.class == Class
-    my_each { |item| return true unless item =~ classification } if classification.class == Regexp
-    my_each { |item| return true unless item == classification } if [Integer, String].include?(classification.class)
+    my_each { |item| return true if yield(item) == true } if block_given?
+    my_each { |item| return true if item.class == classification } if classification.class == Class
+    my_each { |item| return true if item =~ classification } if classification.class == Regexp
+    my_each { |item| return true if item == classification } if [Integer, String].include?(classification.class)
     my_each { |item| return true if item } if !classification && !block_given?
     test
   end
@@ -70,7 +70,7 @@ module Enumerable
   def my_count(classification = nil)
     counter = 0
     my_each { |item| counter += 1 if item == classification } if [Integer, String].include?(classification.class)
-    my_each { |item| counter += 1 if yield(item) == true } if [Integer, String].include?(classification.class)
+    my_each { |item| counter += 1 if yield(item) == true } if block_given?
     my_each { |item| counter += 1 if item.class == classification } if classification.class == Class
     return length if !classification && !block_given?
 
@@ -102,3 +102,9 @@ module Enumerable
     beginner
   end
 end
+
+arr=[1,2,3,4,7,1]
+words=['cat','bear','lion']
+print arr.my_all?{
+  |num| num<=7
+}
