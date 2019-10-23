@@ -102,9 +102,3 @@ module Enumerable
     beginner
   end
 end
-
-arr=[1,2,3,4,7,1]
-words=['cat','bear','lion']
-print arr.my_all?{
-  |num| num<=7
-}
