@@ -23,4 +23,22 @@ describe 'Enumerable' do
       end
     end
   end
+
+  describe '#my_each_with_index' do
+    context 'If block is given' do
+      it 'iterates the given block for each array item using their indexes' do
+        my_array = []
+        original_array = []
+        num_arr.my_each_with_index { |item, index| my_array << item + index }
+        num_arr.each_with_index { |item, index| original_array << item + index }
+        expect(my_array).to eql(original_array)
+      end
+    end
+
+    context 'If block is not given' do
+      it 'returns an enumerator' do
+        expect(num_arr.my_each_with_index.is_a?(Enumerable)).not_to eql(false)
+      end
+    end
+  end
 end
