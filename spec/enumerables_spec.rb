@@ -86,23 +86,23 @@ describe 'Enumerable' do
 
     context 'If called without an argument or block' do
       it 'returns true if any item is true' do
-        expect(num_arr.my_any?).to eql(true)
+        expect(num_arr.my_any?).not_to eql(false)
       end
     end
   end
 
-  describe '#my_any?' do
-    context 'If a class is given' do
-      it 'returns true if any item in the array belongs to that class' do
-        my_result = word_arr.my_any? Integer
-        original_result = word_arr.any? Integer
+  describe '#my_none?' do
+    context 'If a block is given' do
+      it 'returns true if no item in the array satisfies the condition stated in the block' do
+        my_result = word_arr.my_none? {|item| item.length < 4}
+        original_result = word_arr.none? {|item| item.length < 4}
         expect(my_result).to eql(original_result)
       end
     end
 
     context 'If called without an argument or block' do
-      it 'returns true if any item is true' do
-        expect(num_arr.my_any?).to eql(true)
+      it 'returns false if any item is true' do
+        expect(num_arr.my_none?).to eql(false)
       end
     end
   end
