@@ -94,8 +94,8 @@ describe 'Enumerable' do
   describe '#my_none?' do
     context 'If a block is given' do
       it 'returns true if no item in the array satisfies the condition stated in the block' do
-        my_result = word_arr.my_none? {|item| item.length < 4}
-        original_result = word_arr.none? {|item| item.length < 4}
+        my_result = word_arr.my_none? { |item| item.length < 4 }
+        original_result = word_arr.none? { |item| item.length < 4 }
         expect(my_result).to eql(original_result)
       end
     end
@@ -110,8 +110,8 @@ describe 'Enumerable' do
   describe '#my_count' do
     context 'If a block is given' do
       it 'counts the number of items in the array that satisfy the condition stated in the block' do
-        my_result = num_arr.my_count {|item| item < 5}
-        original_result = num_arr.count {|item| item < 5}
+        my_result = num_arr.my_count { |item| item < 5 }
+        original_result = num_arr.count { |item| item < 5 }
         expect(my_result).to eql(original_result)
       end
     end
@@ -141,12 +141,12 @@ describe 'Enumerable' do
 
   describe '#my_inject' do
     context 'If a block is given' do
-        it 'combines all elements using the binary operation specified in the block' do
-            my_result= num_arr.my_inject{|sum,num| sum + num}
-            original_result=num_arr.my_inject{|sum,num| sum + num}
-            expect(my_result).to eql(original_result)  
-        end
+      it 'combines all elements using the binary operation specified in the block' do
+        my_result = num_arr.my_inject { |sum, num| sum + num }
+        original_result = num_arr.my_inject { |sum, num| sum + num }
+        expect(my_result).to eql(original_result)
       end
+    end
 
     context 'If a symbol alone or in combination with an initial value is given as an argument' do
       it 'combines all elements starting with the initial using the operator specified in the symbol' do
