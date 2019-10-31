@@ -41,4 +41,20 @@ describe 'Enumerable' do
       end
     end
   end
+
+  describe '#my_select' do
+    context 'If block is given' do
+      it 'selects items that fulfil a condition given in the block' do
+        my_array = num_arr.my_select { |item| item > 2 }
+        original_array = num_arr.select { |item| item > 2 }
+        expect(my_array).to eql(original_array)
+      end
+    end
+
+    context 'If block is not given' do
+      it 'returns an enumerator' do
+        expect(num_arr.my_select.is_a?(Enumerable)).to eql(true)
+      end
+    end
+  end
 end
