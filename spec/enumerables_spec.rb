@@ -74,4 +74,36 @@ describe 'Enumerable' do
       end
     end
   end
+
+  describe '#my_any?' do
+    context 'If a class is given' do
+      it 'returns true if any item in the array belongs to that class' do
+        my_result = word_arr.my_any? Integer
+        original_result = word_arr.any? Integer
+        expect(my_result).to eql(original_result)
+      end
+    end
+
+    context 'If called without an argument or block' do
+      it 'returns true if any item is true' do
+        expect(num_arr.my_any?).to eql(true)
+      end
+    end
+  end
+
+  describe '#my_any?' do
+    context 'If a class is given' do
+      it 'returns true if any item in the array belongs to that class' do
+        my_result = word_arr.my_any? Integer
+        original_result = word_arr.any? Integer
+        expect(my_result).to eql(original_result)
+      end
+    end
+
+    context 'If called without an argument or block' do
+      it 'returns true if any item is true' do
+        expect(num_arr.my_any?).to eql(true)
+      end
+    end
+  end
 end
