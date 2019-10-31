@@ -16,5 +16,11 @@ describe 'Enumerable' do
         expect(my_array).to eql(original_array)
       end
     end
+
+    context 'If block is not given' do
+      it 'returns an enumerator' do
+        expect(num_arr.my_each.is_a?(Enumerable)).not_to eql(false)
+      end
+    end
   end
 end
