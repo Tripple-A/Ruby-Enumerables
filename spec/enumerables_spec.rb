@@ -106,4 +106,20 @@ describe 'Enumerable' do
       end
     end
   end
+
+  describe '#my_count' do
+    context 'If a block is given' do
+      it 'counts the number of items in the array that satisfy the condition stated in the block' do
+        my_result = num_arr.my_count {|item| item < 5}
+        original_result = num_arr.count {|item| item < 5}
+        expect(my_result).to eql(original_result)
+      end
+    end
+
+    context 'If a class is given as the argument' do
+      it 'counts the number of array items that belong to that class' do
+        expect(num_arr.count(String)).to eql(num_arr.my_count(String))
+      end
+    end
+  end
 end
