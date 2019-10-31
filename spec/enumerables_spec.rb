@@ -20,7 +20,7 @@ describe 'Enumerable' do
 
     context 'If block is not given' do
       it 'returns an enumerator' do
-        expect(num_arr.my_each.is_a?(Enumerable)).not_to eql(false)
+        expect(num_arr.my_each.is_a?(Enumerable)).not_to be false
       end
     end
   end
@@ -38,7 +38,7 @@ describe 'Enumerable' do
 
     context 'If block is not given' do
       it 'returns an enumerator' do
-        expect(num_arr.my_each_with_index.is_a?(Enumerable)).not_to eql(false)
+        expect(num_arr.my_each_with_index.is_a?(Enumerable)).not_to be false
       end
     end
   end
@@ -54,7 +54,7 @@ describe 'Enumerable' do
 
     context 'If block is not given' do
       it 'returns an enumerator' do
-        expect(num_arr.my_select.is_a?(Enumerable)).to eql(true)
+        expect(num_arr.my_select.is_a?(Enumerable)).to be true
       end
     end
   end
@@ -70,7 +70,7 @@ describe 'Enumerable' do
 
     context 'If called without an argument or block' do
       it 'returns true' do
-        expect(num_arr.my_all?).to eql(true)
+        expect(num_arr.my_all?).to be true
       end
     end
   end
@@ -86,7 +86,7 @@ describe 'Enumerable' do
 
     context 'If called without an argument or block' do
       it 'returns true if any item is true' do
-        expect(num_arr.my_any?).not_to eql(false)
+        expect(num_arr.my_any?).not_to be false
       end
     end
   end
@@ -102,7 +102,7 @@ describe 'Enumerable' do
 
     context 'If called without an argument or block' do
       it 'returns false if any item is true' do
-        expect(num_arr.my_none?).to eql(false)
+        expect(num_arr.my_none?).to be false
       end
     end
   end
@@ -134,7 +134,7 @@ describe 'Enumerable' do
 
     context 'If block is not given' do
       it 'returns an enumerator' do
-        expect(num_arr.my_map.is_a?(Enumerable)).to eql(true)
+        expect(num_arr.my_map.is_a?(Enumerable)).to be true
       end
     end
   end
