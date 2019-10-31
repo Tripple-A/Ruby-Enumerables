@@ -5,6 +5,7 @@ require './enumerable_methods.rb'
 describe 'Enumerable' do
   let(:num_arr) { [3, 4, 2, 1] }
   let(:empty_arr) { [] }
+  let(:word_arr) { %w[ant antelope dog zebra] }
 
   describe '#my_each' do
     context 'If block is given' do
@@ -54,6 +55,22 @@ describe 'Enumerable' do
     context 'If block is not given' do
       it 'returns an enumerator' do
         expect(num_arr.my_select.is_a?(Enumerable)).to eql(true)
+      end
+    end
+  end
+
+  describe '#my_all?' do
+    context 'If a class is given' do
+      it 'returns true if all items in the array belong to that class' do
+        my_result = word_arr.my_all? String
+        original_result = word_arr.all? String
+        expect(my_result).to eql(original_result)
+      end
+    end
+
+    context 'If called without an argument or block' do
+      it 'returns true' do
+        expect(num_arr.my_all?).to eql(true)
       end
     end
   end
