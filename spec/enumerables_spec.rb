@@ -122,4 +122,38 @@ describe 'Enumerable' do
       end
     end
   end
+
+  describe '#my_map' do
+    context 'If block is given' do
+      it 'returns a new array of items that fulfil the condition given in the block' do
+        my_array = num_arr.my_map { |item| item > 0 }
+        original_array = num_arr.map { |item| item > 0 }
+        expect(my_array).to eql(original_array)
+      end
+    end
+
+    context 'If block is not given' do
+      it 'returns an enumerator' do
+        expect(num_arr.my_map.is_a?(Enumerable)).to eql(true)
+      end
+    end
+  end
+
+  describe '#my_inject' do
+    context 'If a block is given' do
+        it 'combines all elements using the binary operation specified in the block' do
+            my_result= num_arr.my_inject{|sum,num| sum + num}
+            original_result=num_arr.my_inject{|sum,num| sum + num}
+            expect(my_result).to eql(original_result)  
+        end
+      end
+
+    context 'If a symbol alone or in combination with an initial value is given as an argument' do
+      it 'combines all elements starting with the initial using the operator specified in the symbol' do
+        my_result = num_arr.my_inject(1, :*)
+        original_result = num_arr.my_inject(1, :*)
+        expect(my_result).to eql(original_result)
+      end
+    end
+  end
 end
